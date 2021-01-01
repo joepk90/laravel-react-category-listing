@@ -10,9 +10,10 @@ class CategoryIndex extends Component {
         return (
             <div>
                 <Router>
-                    <div className="container">
-                        <Link className="nav-item" to="/category">Listing</Link>
-                        <Link className="nav-item" to="/category/add">Add</Link>
+                    <div className="container mb-2">
+
+                        <Link className="btn btn-primary mr-2" to="/category">Listing</Link>
+                        <Link className="btn btn-primary mr-2" to="/category/add">Add</Link>
 
                         <Route exact path="/category" component={CategoryListing} />
                         <Route exact path="/category/add" component={CategoryNew} />
