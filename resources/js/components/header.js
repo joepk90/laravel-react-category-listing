@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import Home from "./home"
 import About from './about';
+import CategoryIndex from './CategoryIndex';
 
 function Header() {
     return (
@@ -22,6 +23,10 @@ function Header() {
                         <li className="nav-item">
                             <Link to="/about" className="nav-link">About Us</Link>
                         </li>
+
+                        <li className="nav-item">
+                            <Link to="/category" className="nav-link">Category</Link>
+                        </li>
                     </ul>
 
                     <form className="form-inline my-2 my-lg-0">
@@ -34,6 +39,7 @@ function Header() {
 
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/category" component={CategoryIndex} />
 
         </Router>
     );
