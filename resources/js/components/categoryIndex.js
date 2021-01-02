@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import CategoryListing from "./categoryListing"
 import CategoryNew from "./categoryNew"
+import CategoryEdit from "./categoryEdit"
 
 class CategoryIndex extends Component {
     render() {
@@ -17,6 +18,7 @@ class CategoryIndex extends Component {
 
                         <Route exact path="/category" component={CategoryListing} />
                         <Route exact path="/category/add" component={CategoryNew} />
+                        <Route exact path="/category/edit/:id" component={CategoryEdit} />
                     </div>
                 </Router>
             </div>
