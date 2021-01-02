@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 class CategoryListing extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            categories: []
+        }
+    }
+
+    async componentDidMount() {
+
+        const categories = await axios.get('http://laravel-react-project.loc/category');
+
+        this.setState({
+            categories: categories.data
+        });
+
+    }
+
     render() {
         return (
             <table className="table">
@@ -14,27 +35,21 @@ class CategoryListing extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Cat 1</td>
-                        <td>Active</td>
-                        <td>Date</td>
-                        <td>Date</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Cat 2</td>
-                        <td>Active</td>
-                        <td>Date</td>
-                        <td>Date</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Cat 3</td>
-                        <td>Active</td>
-                        <td>Date</td>
-                        <td>Date</td>
-                    </tr>
+
+                    {this.state.categories.map(category => {
+
+                        return (
+                            <tr key={category.id}>
+                                <th scope="row">{category.id}</th>
+                                <td>{category.name}</td>
+                                <td>{category.active}</td>
+                                <td>{category.created_at}</td>
+                                <td>{category.updated_at}</td>
+                            </tr>
+                        );
+
+                    })}
+
                 </tbody>
             </table>
         );
