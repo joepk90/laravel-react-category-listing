@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get('/category', [CategoryController::class, 'index']);
 Route::post('/category/store', [CategoryController::class, 'store']);
 Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy']);
+Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
+Route::put('/category/update/{id}', [CategoryController::class, 'update']);
