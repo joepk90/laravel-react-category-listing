@@ -12,13 +12,18 @@ class CategoryListing extends Component {
         }
     }
 
-    async componentDidMount() {
+    async getCategories() {
 
         const categories = await axios.get('http://laravel-react-project.loc/category');
 
         this.setState({
             categories: categories.data
         });
+    }
+
+    componentDidMount() {
+
+        this.getCategories();
 
     }
 
