@@ -21,6 +21,20 @@ class CategoryListing extends Component {
         });
     }
 
+    async handleOnDelete(category_id) {
+
+        const response = await axios.delete('http://laravel-react-project.loc/category/delete/' + category_id);
+
+        console.log(response);
+
+        const categories = this.state.categories.filter(category => category.id !== category_id);
+
+        this.setState({
+            categories
+        })
+
+    }
+
     componentDidMount() {
 
         this.getCategories();
@@ -37,6 +51,7 @@ class CategoryListing extends Component {
                         <th scope="col">Status</th>
                         <th scope="col">Created At</th>
                         <th scope="col">Updated At</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +65,7 @@ class CategoryListing extends Component {
                                 <td>{category.active}</td>
                                 <td>{category.created_at}</td>
                                 <td>{category.updated_at}</td>
+                                <td><a href="#" onClick={() => this.handleOnDelete(category.id)}>Delete</a></td>
                             </tr>
                         );
 
