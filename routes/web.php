@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/category', [CategoryController::class, 'index']);
+Route::post('/category/store', [CategoryController::class, 'store']);
