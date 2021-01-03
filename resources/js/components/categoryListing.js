@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
+import Pagination from 'react-js-pagination';
 
 class CategoryListing extends Component {
 
@@ -9,7 +9,11 @@ class CategoryListing extends Component {
         super();
 
         this.state = {
-            categories: []
+            categories: [],
+            activePage: 0,
+            itemsCountPerPage: 0,
+            totalItemsCount: 0,
+            pageRangeDisplayed: 0
         }
     }
 
@@ -18,7 +22,10 @@ class CategoryListing extends Component {
         const categories = await axios.get('http://laravel-react-project.loc/category');
 
         this.setState({
-            categories: categories.data
+            categories: categories.data.data,
+            itemsCountPerPage: categories.data.per_page,
+            totalItemsCount: categories.data.total,
+            activePage: categories.current_page,
         });
     }
 
@@ -36,47 +43,75 @@ class CategoryListing extends Component {
 
     }
 
+    async handlePageChange(pageNumber) {
+
+        const response = await axios.get('http://laravel-react-project.loc/category?page=' + pageNumber);
+
+        this.setState({
+            categories: response.data.data,
+            itemsCountPerPage: response.data.per_page,
+            totalItemsCount: response.data.total,
+            activePage: response.current_page,
+        });
+
+    }
+
     componentDidMount() {
-
         this.getCategories();
-
     }
 
     render() {
         return (
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Category Name</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Updated At</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    {this.state.categories.map(category => {
+            <div className="category-listing">
 
-                        return (
-                            <tr key={category.id}>
-                                <th scope="row">{category.id}</th>
-                                <td>{category.name}</td>
-                                <td>{category.active}</td>
-                                <td>{category.created_at}</td>
-                                <td>{category.updated_at}</td>
-                                <td>
-                                    <Link to={"/category/edit/" + category.id}>Edit</Link>
-                                    <a href="#" onClick={() => this.handleOnDelete(category.id)}>Delete</a>
-                                </td>
-                            </tr>
-                        );
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Updated At</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    })}
+                        {this.state.categories.map(category => {
 
-                </tbody>
-            </table>
+                            return (
+                                <tr key={category.id}>
+                                    <th scope="row">{category.id}</th>
+                                    <td>{category.name}</td>
+                                    <td>{category.active}</td>
+                                    <td>{category.created_at}</td>
+                                    <td>{category.updated_at}</td>
+                                    <td>
+                                        <Link to={"/category/edit/" + category.id}>Edit</Link>
+                                        <a href="#" onClick={() => this.handleOnDelete(category.id)}>Delete</a>
+                                    </td>
+                                </tr>
+                            );
+
+                        })}
+
+                    </tbody>
+                </table>
+
+                <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={this.state.itemsCountPerPage}
+                    totalItemsCount={this.state.totalItemsCount}
+                    pageRangeDisplayed={this.state.pageRangeDisplayed}
+                    onChange={this.handlePageChange.bind(this)}
+                    itemClass="page-item"
+                    linkClass="page-link"
+                />
+
+            </div>
+
+
         );
     }
 }
