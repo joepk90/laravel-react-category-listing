@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 import Home from "./home"
 import About from './about';
 import CategoryIndex from './CategoryIndex';
-import CategoryNew from './CategoryNew';
-import CategoryEdit from './CategoryEdit';
+import Error404 from './error404';
 
 function Header() {
     return (
@@ -39,13 +38,20 @@ function Header() {
                 </div>
             </nav>
 
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/category" component={CategoryIndex} />
+            <div className="row">
+                <div className="col-md-12">
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/about" component={About} />
+                        <Route exact path="/category" component={CategoryIndex} />
 
-            {/* // these routes are also being defined in the category index page - there might be a better way of handling this... */}
-            <Route exact path="/category/add" component={CategoryIndex} />
-            <Route exact path="/category/edit/:id" component={CategoryIndex} />
+                        {/* // these routes are also being defined in the category index page - there might be a better way of handling this... */}
+                        <Route exact path="/category/add" component={CategoryIndex} />
+                        <Route exact path="/category/edit/:id" component={CategoryIndex} />
+                        <Route path="/" component={Error404} />
+                    </Switch>
+                </div>
+            </div>
 
         </React.Fragment>
     );
