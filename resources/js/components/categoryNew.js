@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
+import Alert from './alert';
 
 class CategoryNew extends Component {
 
@@ -10,7 +11,8 @@ class CategoryNew extends Component {
         this.onChangeCategoryName = this.onChangeCategoryName.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.state = {
-            category_name: ''
+            category_name: '',
+            alert: {}
         }
     }
 
@@ -27,37 +29,61 @@ class CategoryNew extends Component {
             category_name: this.state.category_name
         }
 
+        const alert = {};
+
         try {
             await axios.post('http://laravel-react-project.loc/api/category/store', category);
 
             this.setState({
-                category_name: ''
+                category_name: '',
+                alert: {
+                    message: 'record added successfuly',
+                    type: 'success'
+                }
             });
 
         } catch (err) {
             console.log(err);
+
+            alert = {
+                message: 'error',
+                type: 'error'
+            };
+
+            this.setState({
+                alert
+            })
         }
 
     }
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
 
-                <div className="form-group">
-                    <label htmlFor="category_name">Category Name</label>
-                    <input type="text"
-                        className="form-control"
-                        id="category_name"
-                        placeholder="Enter category"
-                        value={this.state.category_name}
-                        onChange={this.onChangeCategoryName}
-                    />
-                </div>
+            <div className="category-new">
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <Alert
+                    alert={this.state.alert}
+                />
 
-            </form>
+                <form onSubmit={this.onSubmit}>
+
+                    <div className="form-group">
+                        <label htmlFor="category_name">Category Name</label>
+                        <input type="text"
+                            className="form-control"
+                            id="category_name"
+                            placeholder="Enter category"
+                            value={this.state.category_name}
+                            onChange={this.onChangeCategoryName}
+                        />
+                    </div>
+
+                    <button type="submit" className="btn btn-primary">Submit</button>
+
+                </form>
+
+            </div>
         );
     }
 }
