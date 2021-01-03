@@ -1,3 +1,44 @@
+# Laravel React Category Listing Project
+### This Setup Steps assumes Docker Devilbox has already been setup and is running.
+#
+#
+#
+#### Create project in the devilbox shared directory (/data/www/)
+```sh
+$ mkdir laravel-react-project
+$ cd laravel-react-project
+```
+
+#### Clone the project 
+```sh
+$ git clone git@github.com:joepk90/laravel-react-category-listing.git laravel-project
+```
+
+#### System link laravel public directory with link htdocs
+*note: htdocs has not been created, this will create the htdocs directory*
+```sh
+$ ln -s laravel-project/public/ htdocs
+```
+
+#### Add the host record to the host file (/etc/hosts)
+```sh
+$ 127.0.0.1 laravel-project.loc to hosts
+```
+
+#### The application should now be running at laravel-project.loc
+Note: this has not actually been fully tested. Originally the laravel command was used to create the project
+
+#### Next Steps
+- Install node modules within the laravel-project directory
+- Create a database and update the root .env file to use the correct database credentials
+- Might need to run *php artisan migrate* in order to create the database tables
+
+
+
+<hr>
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
