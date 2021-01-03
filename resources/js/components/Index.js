@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Footer from './footer';
 import Header from './header';
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+
 
 function Index() {
     return (
@@ -17,5 +19,5 @@ function Index() {
 export default Index;
 
 if (document.getElementById('app')) {
-    ReactDOM.render(<Index />, document.getElementById('app'));
+    ReactDOM.render(<Router><Index /></Router>, document.getElementById('app'));
 }

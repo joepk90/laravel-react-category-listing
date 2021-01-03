@@ -1,13 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 import Home from "./home"
 import About from './about';
 import CategoryIndex from './CategoryIndex';
+import CategoryNew from './CategoryNew';
+import CategoryEdit from './CategoryEdit';
 
 function Header() {
     return (
-        <Router>
+        <React.Fragment>
 
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -41,7 +43,11 @@ function Header() {
             <Route exact path="/about" component={About} />
             <Route exact path="/category" component={CategoryIndex} />
 
-        </Router>
+            {/* // these routes are also being defined in the category index page - there might be a better way of handling this... */}
+            <Route exact path="/category/add" component={CategoryIndex} />
+            <Route exact path="/category/edit/:id" component={CategoryIndex} />
+
+        </React.Fragment>
     );
 }
 
