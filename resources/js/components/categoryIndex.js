@@ -14,6 +14,8 @@ class CategoryIndex extends Component {
                     <Link className="btn btn-primary mr-2" to="/category">Listing</Link>
                     <Link className="btn btn-primary mr-2" to="/category/add">Add</Link>
 
+                    <hr />
+
                     <Route exact path="/category" component={CategoryListing} />
                     <Route exact path="/category/add" component={CategoryNew} />
                     <Route exact path="/category/edit/:id" component={CategoryEdit} />

@@ -46,8 +46,8 @@ class CategoryNew extends Component {
             console.log(err);
 
             alert = {
-                message: 'error',
-                type: 'error'
+                message: 'error: ' + err,
+                type: 'danger'
             };
 
             this.setState({
