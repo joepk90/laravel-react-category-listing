@@ -33,8 +33,6 @@ class CategoryListing extends Component {
 
         const response = await axios.delete('http://laravel-react-project.loc/category/delete/' + category_id);
 
-        console.log(response);
-
         const categories = this.state.categories.filter(category => category.id !== category_id);
 
         this.setState({
