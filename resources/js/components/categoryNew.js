@@ -28,7 +28,7 @@ class CategoryNew extends Component {
         }
 
         try {
-            await axios.post('http://laravel-react-project.loc/category/store', category);
+            await axios.post('http://laravel-react-project.loc/api/category/store', category);
 
             this.setState({
                 category_name: ''

@@ -16,7 +16,7 @@ class CategoryEdit extends Component {
 
     async getCategoryData() {
 
-        const response = await axios.get('http://laravel-react-project.loc/category/edit/' + this.props.match.params.id);
+        const response = await axios.get('http://laravel-react-project.loc/api/category/edit/' + this.props.match.params.id);
 
         this.setState({
             category_name: response.data.name
@@ -44,7 +44,7 @@ class CategoryEdit extends Component {
         }
 
         try {
-            await axios.put('http://laravel-react-project.loc/category/update/' + this.props.match.params.id, category);
+            await axios.put('http://laravel-react-project.loc/api/category/update/' + this.props.match.params.id, category);
         } catch (err) {
             console.log(err);
         }

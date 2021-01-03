@@ -19,7 +19,7 @@ class CategoryListing extends Component {
 
     async getCategories() {
 
-        const categories = await axios.get('http://laravel-react-project.loc/category');
+        const categories = await axios.get('http://laravel-react-project.loc/api/category');
 
         this.setState({
             categories: categories.data.data,
@@ -31,7 +31,7 @@ class CategoryListing extends Component {
 
     async handleOnDelete(category_id) {
 
-        const response = await axios.delete('http://laravel-react-project.loc/category/delete/' + category_id);
+        const response = await axios.delete('http://laravel-react-project.loc/api/category/delete/' + category_id);
 
         const categories = this.state.categories.filter(category => category.id !== category_id);
 
@@ -43,7 +43,7 @@ class CategoryListing extends Component {
 
     async handlePageChange(pageNumber) {
 
-        const response = await axios.get('http://laravel-react-project.loc/category?page=' + pageNumber);
+        const response = await axios.get('http://laravel-react-project.loc/api/category?page=' + pageNumber);
 
         this.setState({
             categories: response.data.data,
